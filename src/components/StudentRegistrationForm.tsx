@@ -1,4 +1,4 @@
-import {ChangeEvent, useEffect, useState} from "react";
+import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 
 export type StudentRegistrationFormType = {
     studentName: string,
@@ -56,10 +56,22 @@ export default function StudentRegistrationForm() {
         ))
     }
 
+    // Wird aufgerufen, wenn das Formular eingereicht wird
+    function handleSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+
+        console.log("Das Formular wurde eingereicht!")
+        console.log("Die Daten sind: ")
+        console.log(registrationForm)
+
+        // Was würden wir jetzt machen...?
+        // Daten ans Backend schicken!
+    }
+
     return (
         <section>
             {/* Formular Tag: */}
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>
                     Name:
                     <input
@@ -91,6 +103,9 @@ export default function StudentRegistrationForm() {
                         onChange={handleFormChange}
                     />
                 </label>
+
+                <br/>
+                <button type={"submit"}>Formular einreichen</button>
             </form>
         </section>
     )
