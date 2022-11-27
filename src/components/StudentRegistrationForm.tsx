@@ -1,4 +1,6 @@
+import {Button, Checkbox, FormControlLabel, FormGroup, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import "./StudentRegistrationForm.css"
 
 export type StudentRegistrationFormType = {
     studentName: string,
@@ -22,7 +24,7 @@ export default function StudentRegistrationForm() {
     const [registrationForm, setRegistrationForm] = useState<StudentRegistrationFormType>(emptyForm)
 
     useEffect(() => {
-        console.log(registrationForm)
+        // console.log(registrationForm)
     }, [registrationForm])
 
     // Reagiere auf Formularänderungen
@@ -72,40 +74,32 @@ export default function StudentRegistrationForm() {
         <section>
             {/* Formular Tag: */}
             <form onSubmit={handleSubmit}>
-                <label>
-                    Name:
-                    <input
-                        type={"text"}
-                        name={"studentName"}
-                        value={registrationForm.studentName}
-                        onChange={handleFormChange}
+                <FormGroup>
+                    <TextField id="outlined-basic" type={"text"} label="Name" name={"studentName"}
+                               value={registrationForm.studentName}
+                               onChange={handleFormChange} variant="outlined"
+                               className="Form-Element"
                     />
-                </label>
 
-                <br/>
-                <label>
-                    Alter:
-                    <input
-                        type={"number"}
-                        name={"age"}
-                        value={registrationForm.age}
-                        onChange={handleFormChange}
+
+                    <TextField id="outlined-basic" type={"number"} label="Alter" name={"age"}
+                               value={registrationForm.age}
+                               onChange={handleFormChange} variant="outlined"
+                               className="Form-Element"
                     />
-                </label>
 
-                <br/>
-                <label>
-                    Ist bereits Student:
-                    <input
-                        type={"checkbox"}
-                        name={"isAlreadyStudent"}
-                        checked={registrationForm.isAlreadyStudent}
-                        onChange={handleFormChange}
+                    <FormControlLabel control={
+                        <Checkbox name={"isAlreadyStudent"}
+                                  checked={registrationForm.isAlreadyStudent}
+                                  onChange={handleFormChange}
+                        />}
+                                      label="Ist bereits Student:"
+                                      className="Form-Element"
                     />
-                </label>
-
-                <br/>
-                <button type={"submit"}>Formular einreichen</button>
+                    <Button type={"submit"} variant="contained" color="primary">
+                        Formular einreichen
+                    </Button>
+                </FormGroup>
             </form>
         </section>
     )
